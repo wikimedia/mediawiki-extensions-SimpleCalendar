@@ -20,7 +20,7 @@ $wgExtensionCredits['parserhook'][] = array(
 
 class SimpleCalendar {
 
-	function __construct {
+	function __construct() {
 		global $wgExtensionFunctions;
 		$wgExtensionFunctions[]	= 'SimpleCalendar::setup';
 		Hooks::register( 'LanguageGetMagic', $this );
@@ -37,7 +37,9 @@ class SimpleCalendar {
 		return true;
 	}
 
-	// Renders a table of all the individual month tables
+	/**
+	 * Expands the "calendar" magic word to a table of all the individual month tables
+	 */
 	public static function render( $parser ) {
 		$parser->mOutput->mCacheTime = -1;
 		$argv = array();
@@ -60,7 +62,9 @@ class SimpleCalendar {
 		return "$table\n|}\n";
 	}
 
-	# Return a calendar table of the passed month and year
+	/**
+	 * Return a calendar table of the passed month and year
+	 */
 	function renderMonth( $m, $y, $prefix = '', $query = '', $format = '%e %B %Y', $dayformat = false ) {
 		$thisDay   = date( 'd' );
 		$thisMonth = date( 'n' );
