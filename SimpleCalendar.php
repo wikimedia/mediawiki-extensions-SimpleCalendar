@@ -86,7 +86,7 @@ class SimpleCalendar {
 				$title = Title::newFromText( $ttext );
 				if( is_object( $title ) ) {
 					$class = $title->exists() ? 'day-active' : 'day-empty';
-					$url = $title->getFullURL( $title->exists() ? '' : $query );
+					$url = $title->getLocalURL( $title->exists() ? '' : $query );
 				} else $url = $ttext;
 				$table .= "|$t|[$url <span class='$class'>$day</span>]\n";
 			}
