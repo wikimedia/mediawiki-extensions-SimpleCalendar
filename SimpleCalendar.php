@@ -90,3 +90,5 @@ class SimpleCalendar {
 		return "$table\n|}";
 	}
 }
+
+new SimpleCalendar();
