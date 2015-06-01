@@ -8,7 +8,7 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-define( 'SIMPLECALENDAR_VERSION','1.2.5, 2015-05-16' );
+define( 'SIMPLECALENDAR_VERSION','1.2.6, 2015-06-01' );
 
 $wgExtensionCredits['parserhook'][] = array(
 	'name'        => 'Simple Calendar',
@@ -22,7 +22,7 @@ class SimpleCalendar {
 
 	function __construct() {
 		global $wgExtensionFunctions;
-		$wgExtensionFunctions[]	= 'SimpleCalendar::setup';
+		$wgExtensionFunctions[]	= array( $this, 'setup' );
 		Hooks::register( 'LanguageGetMagic', $this );
 	}
 
@@ -31,16 +31,16 @@ class SimpleCalendar {
 		return true;
 	}
 
-	public static function setup() {
+	public function setup() {
 		global $wgParser;
-		$wgParser->setFunctionHook( 'calendar', 'SimpleCalendar::render' );
+		$wgParser->setFunctionHook( 'calendar', array( $this, 'render' ) );
 		return true;
 	}
 
 	/**
 	 * Expands the "calendar" magic word to a table of all the individual month tables
 	 */
-	public static function render( $parser ) {
+	public function render( $parser ) {
 		$parser->mOutput->mCacheTime = -1;
 		$argv = array();
 		foreach( func_get_args() as $arg ) if( !is_object( $arg ) ) {
@@ -53,12 +53,12 @@ class SimpleCalendar {
 		if( isset( $argv['year'] ) )      $y = $argv['year']; else $y = date( 'Y' );
 		if( isset( $argv['month'] ) ) {
 			$m = $argv['month'];
-			return self::renderMonth( strftime( '%m', strtotime( "$y-$m-01" ) ), $y, $p, $q, $f, $df );
+			return $this->renderMonth( strftime( '%m', strtotime( "$y-$m-01" ) ), $y, $p, $q, $f, $df );
 		} else $m = 1;
 		$table = "<table class=\"calendar\"><tr>\n";
 		for( $rows = 3; $rows--; $table .= "</tr>\n<tr>" )
 			for( $cols = 0; $cols < 4; $cols++ )
-				$table .= '<td>' . self::renderMonth( $m++, $y, $p, $q, $f, $df ) . "</td>\n";
+				$table .= '<td>' . $this->renderMonth( $m++, $y, $p, $q, $f, $df ) . "</td>\n";
 		$table .= "\n</tr></table>\n";
 		return array( $table, 'isHTML' => true, 'noparse' => true );
 	}
@@ -66,7 +66,7 @@ class SimpleCalendar {
 	/**
 	 * Return a calendar table of the passed month and year
 	 */
-	static function renderMonth( $m, $y, $prefix = '', $query = '', $format = '%e %B %Y', $dayformat = false ) {
+	private function renderMonth( $m, $y, $prefix = '', $query = '', $format = '%e %B %Y', $dayformat = false ) {
 		$thisDay   = date( 'd' );
 		$thisMonth = date( 'n' );
 		$thisYear  = date( 'Y' );
