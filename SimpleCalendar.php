@@ -8,7 +8,7 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-define( 'SIMPLECALENDAR_VERSION', '1.2.7, 2015-06-01' );
+define( 'SIMPLECALENDAR_VERSION', '1.2.8, 2015-06-06' );
 
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'Simple Calendar',
@@ -69,13 +69,13 @@ class SimpleCalendar {
 		// Otherwise start month at 1 and build the main container table
 		else {
 			$m = 1;
-			$table = "<table class=\"calendar\"><tr>\n";
-			for ( $rows = 3; $rows--; $table .= "</tr>\n<tr>" ) {
+			$table = "<table class=\"calendar\"><tr>";
+			for ( $rows = 3; $rows--; $table .= "</tr><tr>" ) {
 				for ( $cols = 0; $cols < 4; $cols++ ) {
-					$table .= '<td>' . $this->renderMonth( $m++ , $y, $p, $q, $f, $df ) . "</td>\n";
+					$table .= "<td>\n" . $this->renderMonth( $m++ , $y, $p, $q, $f, $df ) . "\n</td>";
 				}
 			}
-			$table .= "\n</tr></table>\n";
+			$table .= "</tr></table>\n";
 		}
 
 		return array( $table, 'isHTML' => true, 'noparse' => true );
@@ -96,17 +96,17 @@ class SimpleCalendar {
 		foreach ( array( 'M', 'T', 'W', 'T', 'F', 'S', 'S' ) as $i => $day ) {
 			$days[] = $dayformat ? wfMessage( strftime( $dayformat, mktime( 0, 0, 0, 2, $i, 2000 ) ) )->text() : $day;
 		}
-		$table = "\n<table border class=\"month\"\n<tr class=\"heading\"><th colspan=\"7\">$month</td></tr>\n";
-		$table .= '<tr class="dow"><th>' . implode( '</th><th>', $days ) . "</th></tr>";
-		$table .= "</tr>\n";
+		$table = "\n<table border class=\"month\">\n\t<tr class=\"heading\"><th colspan=\"7\">$month</th></tr>\n";
+		$table .= "\t<tr class=\"dow\"><th>" . implode( '</th><th>', $days ) . "</th></tr>\n";
+		$table .= "\t<tr>\n";
 		if ( $d > 1 ) {
-			$table .= str_repeat( "<td>&nbsp;</td>", $d - 1 );
+			$table .= "\t\t" . str_repeat( "<td>&nbsp;</td>", $d - 1 ) . "\n";
 		}
 		for ( $i = $day = $d; $day < 32; $i++ ) {
 			$day = $i - $d + 1;
 			if ( $day < 29 or checkdate( $m, $day, $y ) ) {
 				if ( $i % 7 == 1 ) {
-					$table .= "\n</tr><tr>\n";
+					$table .= "\n\t</tr>\n\t<tr>\n";
 				}
 				$t = ( $day == $thisDay && $m == $thisMonth && $y == $thisYear ) ? '  today' : '';
 				$ttext = $prefix . trim( strftime( $format, mktime( 0, 0, 0, $m, $day, $y ) ) );
@@ -117,10 +117,10 @@ class SimpleCalendar {
 				} else {
 					$url = $ttext;
 				}
-				$table .= "<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
+				$table .= "\t\t<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
 			}
 		}
-		$table .= "\n</table>";
+		$table .= "\n\t</tr>\n</table>";
 		return $table;
 	}
 }
