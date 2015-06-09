@@ -115,7 +115,7 @@ class SimpleCalendar {
 					$class = $title->exists() ? 'day-active' : 'day-empty';
 					$url = $title->getLocalURL( $title->exists() ? '' : $query );
 				} else {
-					$url = $ttext;
+					$url = "Bad title: \"$ttext\"";
 				}
 				$table .= "\t\t<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
 			}
