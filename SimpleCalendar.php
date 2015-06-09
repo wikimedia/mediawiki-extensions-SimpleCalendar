@@ -8,7 +8,7 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-define( 'SIMPLECALENDAR_VERSION', '1.2.8, 2015-06-06' );
+define( 'SIMPLECALENDAR_VERSION', '1.2.9, 2015-06-09' );
 
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'Simple Calendar',
@@ -115,7 +115,7 @@ class SimpleCalendar {
 					$class = $title->exists() ? 'day-active' : 'day-empty';
 					$url = $title->getLocalURL( $title->exists() ? '' : $query );
 				} else {
-					$url = "Bad title: \"$ttext\"";
+					$url = "Bad title: \"$ttext\" (using format \"$format\")";
 				}
 				$table .= "\t\t<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
 			}
