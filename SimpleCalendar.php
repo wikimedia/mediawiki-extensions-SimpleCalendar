@@ -1,6 +1,6 @@
 <?php
 /**
- * MediaWiki SimpleCalendar Extension
+ * SimpleCalendar Extension
  *
  * @package MediaWiki
  * @subpackage Extensions
@@ -11,10 +11,10 @@
 define( 'SIMPLECALENDAR_VERSION', '1.2.9, 2015-06-09' );
 
 $wgExtensionCredits['parserhook'][] = array(
-	'name' => 'Simple Calendar',
+	'name' => 'SimpleCalendar',
 	'author' => '[http://www.organicdesign.co.nz/aran Aran Dunkley]',
 	'description' => 'A simple calendar extension',
-	'url' => 'http://www.mediawiki.org/wiki/Extension:Simple_Calendar',
+	'url' => 'http://www.mediawiki.org/wiki/Extension:SimpleCalendar',
 	'version' => SIMPLECALENDAR_VERSION
 );
 
