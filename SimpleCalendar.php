@@ -8,7 +8,7 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-define( 'SIMPLECALENDAR_VERSION', '1.2.9, 2015-06-09' );
+define( 'SIMPLECALENDAR_VERSION', '1.2.10, 2015-06-12' );
 
 $wgExtensionCredits['parserhook'][] = array(
 	'name'        => 'SimpleCalendar',
@@ -54,7 +54,7 @@ class SimpleCalendar {
 		}
 
 		// Set options to defaults or specified values
-		$f  = isset( $argv['format'] )    ? $argv['format']                 : '%e %B %Y';
+		$f  = isset( $argv['format'] )    ? $argv['format']                 : ( strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '%#d %B %Y' : '%e %B %Y' );
 		$df = isset( $argv['dayformat'] ) ? $argv['dayformat']              : false;
 		$p  = isset( $argv['title'] )     ? $argv['title'] . '/'            : '';
 		$q  = isset( $argv['query'] )     ? $argv['query'] . '&action=edit' : 'action=edit';
@@ -84,7 +84,7 @@ class SimpleCalendar {
 	/**
 	 * Return a calendar table of the passed month and year
 	 */
-	private function renderMonth( $m, $y, $prefix = '', $query = '', $format = '%e %B %Y', $dayformat = false ) {
+	private function renderMonth( $m, $y, $prefix, $query, $format, $dayformat ) {
 		$thisDay = date( 'd' );
 		$thisMonth = date( 'n' );
 		$thisYear = date( 'Y' );
