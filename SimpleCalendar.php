@@ -8,7 +8,7 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-define( 'SIMPLECALENDAR_VERSION', '1.2.10, 2015-06-12' );
+define( 'SIMPLECALENDAR_VERSION', '1.2.11, 2015-06-19' );
 
 $wgExtensionCredits['parserhook'][] = array(
 	'name'        => 'SimpleCalendar',
@@ -32,9 +32,18 @@ class SimpleCalendar {
 	}
 
 	public function setup() {
-		global $wgParser;
+		global $wgParser, $wgResourceModules, $wgExtensionAssetsPath;
+
+		// Register the parser-function
 		$wgParser->setFunctionHook( 'calendar', array( $this, 'render' ) );
-		return true;
+
+		// Add CSS
+		$path = $wgExtensionAssetsPath . '/' . basename( __DIR__ );
+		$wgResourceModules['ext.ajaxcomments'] = array(
+			'styles'        => array( 'simplecalendar.css' ),
+			'localBasePath'  => __DIR__,
+			'remoteBasePath' => $path,
+		);
 	}
 
 	/**
