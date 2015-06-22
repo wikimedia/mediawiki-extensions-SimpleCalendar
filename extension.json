@@ -6,7 +6,7 @@
 	"description": "A simple calendar extension",
 	"license-name": "[https://www.gnu.org/licenses/gpl-2.0.html GNU General Public Licence 2.0] or later",
 	"type": "parserhook",
-	"callback": "SimpleCalendar::onLoad",
+	"callback": "SimpleCalendar::onRegistration",
 	"ExtensionMessagesFiles": {
 		"SimpleCalendarMagic": "SimpleCalendar.i18n.magic.php"
 	},

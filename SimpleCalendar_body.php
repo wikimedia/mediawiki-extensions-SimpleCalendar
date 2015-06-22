@@ -4,7 +4,7 @@ class SimpleCalendar {
 	/**
 	 * Called when the extension is first loaded
 	 */
-	public static function onLoad() {
+	public static function onRegistration() {
 		global $wgExtensionFunctions;
 		$wgExtensionFunctions[] = __CLASS__ . '::setup';
 	}
