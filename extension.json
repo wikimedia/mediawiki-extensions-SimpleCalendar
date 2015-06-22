@@ -1,0 +1,30 @@
+{
+	"name": "SimpleCalendar",
+	"version": "1.3.0, 2015-06-22",
+	"author": ["[http://www.organicdesign.co.nz/aran Aran Dunkley]"],
+	"url": "http://www.mediawiki.org/wiki/Extension:SimpleCalendar",
+	"description": "A simple calendar extension",
+	"license-name": "[https://www.gnu.org/licenses/gpl-2.0.html GNU General Public Licence 2.0] or later",
+	"type": "parserhook",
+	"callback": "SimpleCalendar::onLoad",
+	"ExtensionMessagesFiles": {
+		"SimpleCalendarMagic": "SimpleCalendar.i18n.magic.php"
+	},
+	"AutoloadClasses": {
+		"SimpleCalendar": "SimpleCalendar_body.php"
+	},
+	"ResourceModules": {
+		"ext.simplecalendar": {
+			"styles": {
+				"simplecalendar.css": {
+					"media": "all"
+				}
+			}
+		}
+	},
+	"@": "The paths will be populated later as it needs be calculated",
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": ""
+	}
+}
