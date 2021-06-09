@@ -1,0 +1,47 @@
+{
+	"name": "mediawiki/simple-calendar",
+	"extra": {
+		"installer-name": "SimpleCalendar"
+	},
+	"license": "GPL-2.0+",
+	"type": "mediawiki-extension",
+	"homepage": "https://www.mediawiki.org/wiki/Extension:SimpleCalendar",
+	"description": "Adds a simple calendar to MediaWiki",
+	"keywords": [
+		"extension",
+		"wiki",
+		"mediawiki"
+	],
+	"authors": [
+		{
+			"name": "Aran Dunkley",
+			"homepage": "http://www.organicdesign.co.nz/aran",
+			"role": "Developer"
+		},
+		{
+			"name": "Robert Vogel",
+			"email": "vogel@hallowelt.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"mediawiki/mediawiki-codesniffer": "19.4.0",
+		"mediawiki/minus-x": "0.3.1",
+		"php-parallel-lint/php-console-highlighter": "0.3.2",
+		"php-parallel-lint/php-parallel-lint": "1.0.0"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor --exclude node_modules",
+			"minus-x check .",
+			"phpcs -sp"
+		],
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		]
+	}
+}
