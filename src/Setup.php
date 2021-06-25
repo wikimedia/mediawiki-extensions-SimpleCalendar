@@ -54,7 +54,7 @@ class Setup {
 		}
 
 		// Otherwise start month at 1 and build the main container table
- else {
+		else {
 			$m = 1;
 			$table = "<table class=\"calendar\"><tr>";
 			for ( $rows = 3; $rows--; $table .= "</tr><tr>" ) {
@@ -63,7 +63,7 @@ class Setup {
 				}
 			}
 			$table .= "</tr></table>\n";
- }
+		}
 
 		return [ $table, 'isHTML' => true, 'noparse' => true ];
 	}
