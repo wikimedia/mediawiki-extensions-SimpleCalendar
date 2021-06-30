@@ -76,7 +76,7 @@ class Setup {
 		$thisMonth = date( 'n' );
 		$thisYear = date( 'Y' );
 		$d = date( 'w', $ts = mktime( 0, 0, 0, $m, 1, $y ) );
-		if ( $d === false ) {
+		if ( empty( $d ) ) {
 			$d = 7;
 		}
 		$month = wfMessage( strtolower( strftime( '%B', $ts ) ) )->text();
@@ -87,7 +87,7 @@ class Setup {
 		$table = "\n<table border class=\"month\">\n\t<tr class=\"heading\"><th colspan=\"7\">$month</th></tr>\n";
 		$table .= "\t<tr class=\"dow\"><th>" . implode( '</th><th>', $days ) . "</th></tr>\n";
 		$table .= "\t<tr>\n";
-		if ( $d > 1 ) {
+		if ( $d > 0 ) {
 			$table .= "\t\t" . str_repeat( "<td>&nbsp;</td>", $d - 1 ) . "\n";
 		}
 		for ( $i = $day = $d; $day < 32; $i++ ) {
@@ -107,6 +107,15 @@ class Setup {
 				}
 				$table .= "\t\t<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
 			}
+		}
+		$last = date( "t", $ts );
+		if ( empty( $d ) ) {
+			$last = 31;
+		}
+		$iClose = 0;
+		while ( ( $d + $last + $iClose ) % 7 !== 1 ) {
+			$iClose++;
+			$table .= "\t\t<td>&nbsp;</td>\n";
 		}
 		$table .= "\n\t</tr>\n</table>";
 		return $table;
