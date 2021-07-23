@@ -4,7 +4,8 @@ module.exports = function ( grunt ) {
 
 	var conf = grunt.file.readJSON( 'extension.json' );
 	grunt.initConfig( {
-		banana: conf.MessagesDirs,
+		// Disabled temporarily, no i18n messages
+		// banana: conf.MessagesDirs,
 		jsonlint: {
 			all: [
 				'**/*.json',
@@ -14,6 +15,6 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'test', [ 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'test', [ 'jsonlint', /* 'banana' */ ] );
 	grunt.registerTask( 'default', 'test' );
 };
