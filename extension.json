@@ -2,17 +2,17 @@
 	"name": "SimpleCalendar",
 	"version": "1.4.0",
 	"author": [
-		"[http://www.organicdesign.co.nz/aran Aran Dunkley]"
+		"[https://organicdesign.nz/User:Nad Aran Dunkley]"
 	],
-	"url": "http://www.mediawiki.org/wiki/Extension:SimpleCalendar",
+	"url": "https://www.mediawiki.org/wiki/Extension:SimpleCalendar",
 	"description": "A simple calendar extension",
-	"license-name": "[https://www.gnu.org/licenses/gpl-2.0.html GNU General Public Licence 2.0] or later",
+	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
 	"ExtensionMessagesFiles": {
 		"SimpleCalendarMagic": "SimpleCalendar.i18n.magic.php"
 	},
 	"AutoloadNamespaces": {
-		"MediaWiki\\Extension\\SimpleCalendar\\" : "src/"
+		"MediaWiki\\Extension\\SimpleCalendar\\": "src/"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "MediaWiki\\Extension\\SimpleCalendar\\Setup::onParserFirstCallInit"
@@ -29,5 +29,6 @@
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources",
 		"remoteExtPath": "SimpleCalendar/resources"
-	}
+	},
+	"manifest_version": 2
 }
