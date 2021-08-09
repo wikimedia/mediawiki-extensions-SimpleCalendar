@@ -8,7 +8,6 @@ use Title;
 class Setup {
 
 	/**
-	 *
 	 * @param Parser $parser
 	 * @return void
 	 */
@@ -54,6 +53,7 @@ class Setup {
 		}
 
 		// Otherwise start month at 1 and build the main container table
+		// phpcs:ignore MediaWiki.ControlStructures.IfElseStructure.SpaceBeforeElse
 		else {
 			$m = 1;
 			$table = "<table class=\"calendar\"><tr>";
@@ -70,6 +70,8 @@ class Setup {
 
 	/**
 	 * Return a calendar table of the passed month and year
+	 *
+	 * @return string
 	 */
 	private static function renderMonth( $m, $y, $prefix, $query, $format, $dayformat ) {
 		$thisDay = date( 'd' );
