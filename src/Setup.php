@@ -19,7 +19,7 @@ class Setup {
 	 * Expands the "calendar" magic word to a table of all the individual month tables
 	 *
 	 * @param Parser $parser
-	 * @return void
+	 * @return array
 	 */
 	public static function render( $parser ) {
 		$parser->getOutput()->updateCacheExpiry( 0 );
@@ -36,15 +36,13 @@ class Setup {
 		}
 
 		// Set options to defaults or specified values
-		$f  = isset( $argv['format'] )
-			? $argv['format']
-			: ( strtoupper( substr( PHP_OS, 0, 3 ) ) == 'WIN'
-				? '%#d %B %Y'
-				: '%e %B %Y' );
-		$df = isset( $argv['dayformat'] ) ? $argv['dayformat'] : false;
+		$f  =
+			$argv['format'] ??
+			( strtoupper( substr( PHP_OS, 0, 3 ) ) == 'WIN' ? '%#d %B %Y' : '%e %B %Y' );
+		$df = $argv['dayformat'] ?? false;
 		$p  = isset( $argv['title'] ) ? $argv['title'] . '/' : '';
 		$q  = isset( $argv['query'] ) ? $argv['query'] . '&action=edit' : 'action=edit';
-		$y  = isset( $argv['year'] ) ? $argv['year'] : date( 'Y' );
+		$y  = $argv['year'] ?? date( 'Y' );
 
 		// If a month is specified, return only that month's table
 		if ( isset( $argv['month'] ) ) {
