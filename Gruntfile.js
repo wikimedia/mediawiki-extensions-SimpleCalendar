@@ -10,6 +10,9 @@ module.exports = function ( grunt ) {
 		// Disabled temporarily, no i18n messages
 		// banana: conf.MessagesDirs,
 		eslint: {
+			options: {
+				cache: true
+			},
 			all: [
 				'**/*.{js,json}',
 				'!node_modules/**',
