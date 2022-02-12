@@ -23,7 +23,7 @@ class Setup {
 	 */
 	public static function render( $parser ) {
 		$parser->getOutput()->updateCacheExpiry( 0 );
-		$parser->getOutput()->addModules( 'ext.simplecalendar' );
+		$parser->getOutput()->addModules( [ 'ext.simplecalendar' ] );
 
 		// Retrieve args
 		$argv = [];
