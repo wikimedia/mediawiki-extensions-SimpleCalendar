@@ -38,7 +38,7 @@ class Setup {
 		// Set options to defaults or specified values
 		$f  =
 			$argv['format'] ??
-			( strtoupper( substr( PHP_OS, 0, 3 ) ) == 'WIN' ? '%#d %B %Y' : '%e %B %Y' );
+			( strtoupper( substr( PHP_OS, 0, 3 ) ) == 'WIN' ? 'j F Y' : 'j F Y' );
 		$df = $argv['dayformat'] ?? false;
 		$p  = isset( $argv['title'] ) ? $argv['title'] . '/' : '';
 		$q  = isset( $argv['query'] ) ? $argv['query'] . '&action=edit' : 'action=edit';
@@ -47,7 +47,7 @@ class Setup {
 		// If a month is specified, return only that month's table
 		if ( isset( $argv['month'] ) ) {
 			$m = $argv['month'];
-			$table = self::renderMonth( strftime( '%m', strtotime( "$y-$m-01" ) ), $y, $p, $q, $f, $df );
+			$table = self::renderMonth( date( 'm', strtotime( "$y-$m-01" ) ), $y, $p, $q, $f, $df );
 		}
 
 		// Otherwise start month at 1 and build the main container table
@@ -79,10 +79,10 @@ class Setup {
 		if ( empty( $d ) ) {
 			$d = 7;
 		}
-		$month = wfMessage( strtolower( strftime( '%B', $ts ) ) )->text();
+		$month = wfMessage( strtolower( date( 'F', $ts ) ) )->text();
 		$days = [];
 		foreach ( [ 'M', 'T', 'W', 'T', 'F', 'S', 'S' ] as $i => $day ) {
-			$days[] = $dayformat ? wfMessage( strftime( $dayformat, mktime( 0, 0, 0, 2, $i, 2000 ) ) )->text() : $day;
+			$days[] = $dayformat ? wfMessage( date( $dayformat, mktime( 0, 0, 0, 2, $i, 2000 ) ) )->text() : $day;
 		}
 		$table = "\n<table border class=\"month\">\n\t<tr class=\"heading\"><th colspan=\"7\">$month</th></tr>\n";
 		$table .= "\t<tr class=\"dow\"><th>" . implode( '</th><th>', $days ) . "</th></tr>\n";
@@ -97,7 +97,7 @@ class Setup {
 					$table .= "\n\t</tr>\n\t<tr>\n";
 				}
 				$t = ( $day == $thisDay && $m == $thisMonth && $y == $thisYear ) ? '  today' : '';
-				$ttext = $prefix . trim( strftime( $format, mktime( 0, 0, 0, $m, $day, $y ) ) );
+				$ttext = $prefix . trim( date( $format, mktime( 0, 0, 0, $m, $day, $y ) ) );
 				$title = Title::newFromText( $ttext );
 				if ( is_object( $title ) ) {
 					$class = $title->exists() ? 'day-active' : 'day-empty';
