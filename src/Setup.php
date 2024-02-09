@@ -66,6 +66,12 @@ class Setup {
 	/**
 	 * Return a calendar table of the passed month and year
 	 *
+	 * @param int $m
+	 * @param int $y
+	 * @param string $prefix
+	 * @param string $query
+	 * @param string $format
+	 * @param string $dayformat
 	 * @return string
 	 */
 	private static function renderMonth( $m, $y, $prefix, $query, $format, $dayformat ) {
