@@ -48,11 +48,8 @@ class Setup {
 		if ( isset( $argv['month'] ) ) {
 			$m = $argv['month'];
 			$table = self::renderMonth( date( 'm', strtotime( "$y-$m-01" ) ), $y, $p, $q, $f, $df );
-		}
-
 		// Otherwise start month at 1 and build the main container table
-		// phpcs:ignore MediaWiki.ControlStructures.IfElseStructure.SpaceBeforeElse
-		else {
+		} else {
 			$m = 1;
 			$table = "<table class=\"calendar\"><tr>";
 			for ( $rows = 3; $rows--; $table .= "</tr><tr>" ) {
