@@ -2,6 +2,7 @@
 
 namespace MediaWiki\Extension\SimpleCalendar;
 
+use Html;
 use Parser;
 use Title;
 
@@ -82,10 +83,10 @@ class Setup {
 		if ( empty( $d ) ) {
 			$d = 7;
 		}
-		$month = wfMessage( strtolower( date( 'F', $ts ) ) )->text();
+		$month = wfMessage( strtolower( date( 'F', $ts ) ) )->escaped();
 		$days = [];
 		foreach ( [ 'M', 'T', 'W', 'T', 'F', 'S', 'S' ] as $i => $day ) {
-			$days[] = $dayformat ? wfMessage( date( $dayformat, mktime( 0, 0, 0, 2, $i, 2000 ) ) )->text() : $day;
+			$days[] = $dayformat ? wfMessage( date( $dayformat, mktime( 0, 0, 0, 2, $i, 2000 ) ) )->escaped() : $day;
 		}
 		$table = "\n<table border class=\"month\">\n\t<tr class=\"heading\"><th colspan=\"7\">$month</th></tr>\n";
 		$table .= "\t<tr class=\"dow\"><th>" . implode( '</th><th>', $days ) . "</th></tr>\n";
@@ -108,7 +109,11 @@ class Setup {
 				} else {
 					$url = "Bad title: \"$ttext\" (using format \"$format\")";
 				}
-				$table .= "\t\t<td class='$class$t'><a href=\"$url\">$day</a></td>\n";
+				$table .= "\t\t";
+				$table .= Html::rawElement( 'td', [ 'class' => "$class$t" ],
+					Html::element( 'a', [ 'href' => $url ], $day )
+				);
+				$table .= "\n";
 			}
 		}
 		$last = date( "t", $ts );
