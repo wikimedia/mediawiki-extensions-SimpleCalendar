@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\SimpleCalendar;
 
-use Html;
+use MediaWiki\Html\Html;
+use MediaWiki\Title\Title;
 use Parser;
-use Title;
 
 class Setup {
 
